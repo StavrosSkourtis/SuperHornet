@@ -20,7 +20,7 @@ abstract public class Screen implements Disposable {
     public static final int TEXTURE_SHADER = 1;
 
     private final LinkedList<Entity> entities;
-
+    
     public final Camera camera;
 
     public Screen() {
@@ -33,16 +33,13 @@ abstract public class Screen implements Disposable {
          */
         entities = new LinkedList<>();
 
-        camera = new Camera(1280, 720, 67f, 0.1f, 100f);
+        camera = new Camera(1280, 720, 67f, 0.1f, 1000f);
 
         //call the create method
         create();
     }
 
-    public void render(long window) {
-        /*
-         glfw stuff
-         */
+    public void render(long window , float delta) {
 
         /*
          Set clear color and clear the screen;
@@ -50,16 +47,20 @@ abstract public class Screen implements Disposable {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
         /*
-         Update the projector
+         Update the camera
          */
         camera.update();
 
         for (int i = 0; i < entities.size(); i++) {
 
-            entities.get(i).render(camera.combinedMatrix);
+            entities.get(i).render(camera);
 
         }
-
+        
+        
+        /*
+         glfw stuff
+         */
         glfwPollEvents();
         glfwSwapBuffers(window); // swap the color buffers
 

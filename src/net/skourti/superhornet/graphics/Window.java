@@ -9,6 +9,9 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import net.skourti.superhornet.input.Keyboard;
+import net.skourti.superhornet.input.Mouse;
+import net.skourti.superhornet.utils.FpsCounter;
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -21,22 +24,25 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Window implements Disposable {
 
     // The window title
-    public String title = "Graphics Project";
+    public static String title = "Graphics Project";
     // The version of this application as a string
-    public String version_string = "0.1 development";
+    public static String version_string = "0.1 development";
     // The version of this app as a number
-    public int version = 0;
+    public static int version = 0;
     // The height of the window in pixels
-    public int height = 720;
+    public static int height = 720;
     // The width of the window in pixels
-    public int width = 1280;
+    public static int width = 1280;
     // Boolean variable that show is the window will be full screen
-    public boolean fullscreen = false;
+    public static boolean fullscreen = false;
+
+    public static boolean vsync = true;
 
     // variable that holds the window id , used for glfw
     private long window;
     private GLFWErrorCallback errorCallback;
-    private GLFWKeyCallback keyCallback;
+    private Keyboard keyCallback;
+    private Mouse mouse;
 
     private boolean exitLoop = false;
 
@@ -51,19 +57,37 @@ public class Window implements Disposable {
         initGlfw();
         initGl();
     }
-
+    
+    public static float delta;
     /**
      * stars the OpenGl thread
      */
     public void create() {
+        double previousFrame = glfwGetTime(),frameTime;
         while (!exitLoop && (glfwWindowShouldClose(window) == GL_FALSE)) {
+            /*
+                Delta time calculation
+            */
+            frameTime = glfwGetTime();
+            delta = (float)(frameTime - previousFrame);
+            previousFrame = frameTime;
+            
+            
             currentScreen.logic();
-            currentScreen.render(window);
+            currentScreen.render(window, delta);
+            FpsCounter.count();
         }
 
         // Destory the window
         dispose();
     }
+    
+    
+    private float getDeltaTime(){
+        
+        return 0;
+    }
+        
 
     /**
      * Disposes the screen and destroys the window
@@ -72,12 +96,11 @@ public class Window implements Disposable {
     public void dispose() {
         currentScreen.dispose();
         ShaderProgram.disposeAll();
-        
+
+        keyCallback.release();
+
         glfwDestroyWindow(window);
-
-        
         glfwTerminate();
-
     }
 
     private void initGl() {
@@ -88,7 +111,7 @@ public class Window implements Disposable {
         glEnable(GL_DEPTH_TEST);
         // Accept fragment if it closer to the camera than the former one
         glDepthFunc(GL_LESS);
-        
+
         ShaderProgram.loadAll();
     }
 
@@ -113,7 +136,12 @@ public class Window implements Disposable {
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
-        
+
+        mouse = new Mouse(window);
+        glfwSetScrollCallback(window, mouse);
+        keyCallback = new Keyboard(window);
+        glfwSetKeyCallback(window, keyCallback);
+
         // Get the resolution of the primary monitor
         ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         // Center our window
@@ -125,8 +153,13 @@ public class Window implements Disposable {
 
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
-        // Enable v-sync
-        //glfwSwapInterval(1);
+        
+        // Set v-sync
+        if (vsync) {
+            glfwSwapInterval(1);
+        } else {
+            glfwSwapInterval(0);
+        }
 
         // Make the window visible
         glfwShowWindow(window);

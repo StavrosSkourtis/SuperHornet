@@ -15,15 +15,13 @@ import net.skourti.superhornet.graphics.Window;
 public class Launcher{
 
     public static void main(String arg[]) {
+        Window.title = "Super Hornet";
+        Window.version = 1;
+        Window.version_string = "v0.1 pre-alpha";
+        Window.width = 1280;
+        Window.height = 720;
+        Window.fullscreen = false;
         Window window = new Window();
-        
-        window.title = "Super Hornet";
-        window.version = 1;
-        window.version_string = "v0.1 pre-alpha";
-        window.width = 1280;
-        window.height = 720;
-        window.fullscreen = false;
-        
         
         window.addScreen("Start Screen",new StartScreen());
         

@@ -22,21 +22,23 @@ public final class ShaderProgram implements Disposable {
     
     public static final int VERTEX_ATTRIB = 0;
     public static final int TCOORD_ATTRIB = 1;
-    public static final int COLOR_ATTRIV = 2;
+    public static final int COLOR_ATTRIB = 2;
+    public static final int NORMAL_ATTRIB = 3;
     
-    public static ShaderProgram textureShader;
+    public static ShaderProgram modelShader;
     public static ShaderProgram colorShader;
     public static ShaderProgram basic;
     
     public static void loadAll(){
         colorShader = new ShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
-        textureShader = new ShaderProgram("shaders/textureVertex.glsl", "shaders/textureFragment.glsl");
         basic = new ShaderProgram("shaders/basic_v.glsl","shaders/basic_f.glsl");
+        modelShader = new ShaderProgram("shaders/model_v.glsl","shaders/model_f.glsl");
     }
     
     public static void disposeAll(){
         colorShader.dispose();
-        textureShader.dispose();
+        basic.dispose();
+        modelShader.dispose();
     }
     
     

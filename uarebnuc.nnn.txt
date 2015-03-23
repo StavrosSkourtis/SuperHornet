@@ -1,0 +1,50 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   nbproject/private/private.xml
+#	new file:   res/jets/fa22raptor/FA-22_Raptor.mtl
+#	new file:   res/jets/fa22raptor/FA-22_Raptor_N.png
+#	new file:   res/jets/fa22raptor/FA-22_Raptor_P01.png
+#	new file:   res/jets/fa22raptor/Glass_Cockpit.png
+#	new file:   res/jets/fa22raptor/Pilot_usa.png
+#	new file:   res/sky/alpine_back.jpg
+#	new file:   res/sky/alpine_front.jpg
+#	new file:   res/sky/alpine_left.jpg
+#	new file:   res/sky/alpine_right.jpg
+#	new file:   res/sky/alpine_top.jpg
+#	new file:   res/sky/bluesky_back.jpg
+#	new file:   res/sky/bluesky_front.jpg
+#	new file:   res/sky/bluesky_left.jpg
+#	new file:   res/sky/bluesky_right.jpg
+#	new file:   res/sky/bluesky_top.JPG
+#	new file:   shaders/model_f.glsl
+#	new file:   shaders/model_v.glsl
+#	deleted:    shaders/textureFragment.glsl
+#	deleted:    shaders/textureVertex.glsl
+#	modified:   shaders/vertex.glsl
+#	modified:   src/main/java/com/hackoeur/jglm/Mat4.java
+#	new file:   src/main/java/com/hackoeur/jglm/Vec2.java
+#	modified:   src/net/skourti/superhornet/Launcher.java
+#	modified:   src/net/skourti/superhornet/graphics/Camera.java
+#	modified:   src/net/skourti/superhornet/graphics/Entity.java
+#	new file:   src/net/skourti/superhornet/graphics/Face.java
+#	deleted:    src/net/skourti/superhornet/graphics/Mesh.java
+#	new file:   src/net/skourti/superhornet/graphics/Model.java
+#	modified:   src/net/skourti/superhornet/graphics/Screen.java
+#	modified:   src/net/skourti/superhornet/graphics/ShaderProgram.java
+#	modified:   src/net/skourti/superhornet/graphics/Texture.java
+#	modified:   src/net/skourti/superhornet/graphics/Window.java
+#	new file:   src/net/skourti/superhornet/input/Keyboard.java
+#	new file:   src/net/skourti/superhornet/input/Mouse.java
+#	new file:   src/net/skourti/superhornet/models/Skybox.java
+#	modified:   src/net/skourti/superhornet/screen/StartScreen.java
+#	new file:   src/net/skourti/superhornet/utils/FpsCounter.java
+#	new file:   src/net/skourti/superhornet/utils/ListUtils.java
+#	new file:   src/net/skourti/superhornet/utils/ModelLoader.java
+#
+

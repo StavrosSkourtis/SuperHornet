@@ -183,6 +183,7 @@ public final class Mat4 extends AbstractMat {
 		m33 = mat[i++];
 	}
 	
+        
 	/**
 	 * Creates a matrix using successive 4-tuples as <em>columns</em>.  The semantics
 	 * are the same as the float array constructor.
@@ -466,6 +467,17 @@ public final class Mat4 extends AbstractMat {
 				result.x, result.y, result.z, result.w
 		);
 	}
+        
+        public Mat4 scale(float scale){
+            float [] mat = {
+                scale ,   0   ,   0   , 0,
+                 0    , scale ,   0   , 0,
+                 0    ,   0   ,   1   , 0,
+                 0    ,   0   ,   0   , 1
+            };
+            
+            return new Mat4(mat);
+        }
 	
 	public Mat4 transpose() {
 		return new Mat4(

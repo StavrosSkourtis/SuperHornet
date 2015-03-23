@@ -15,7 +15,11 @@ import com.hackoeur.jglm.Vec3;
  */
 abstract public class Entity implements Disposable {
 
-    public Mesh mesh;
+    public static final int SKYBOX = 0;
+    public static final int RELATIVE_MODEL = 1;
+
+    public int drawMode;
+    public Model mesh;
     public Mat4 traslationMatrix;
     public Mat4 rotationMatrix;
     public Mat4 scaleMatrix;
@@ -24,9 +28,11 @@ abstract public class Entity implements Disposable {
     public ShaderProgram shader;
 
     public Entity() {
+        drawMode = RELATIVE_MODEL;
         traslationMatrix = new Mat4(1.0f);
         rotationMatrix = new Mat4(1.0f);
         scaleMatrix = new Mat4(1.0f);
+        mesh = new Model();
         create();
     }
 
@@ -43,17 +49,31 @@ abstract public class Entity implements Disposable {
         rotationMatrix = Matrices.rotate(this.angle, axis);
     }
 
+    public void translate(Vec3 position) {
+        traslationMatrix = traslationMatrix.translate(position);
+    }
+
+    public void scale(float ammount) {
+        scaleMatrix = scaleMatrix.scale(ammount);
+    }
+
     public Mat4 getModel() {
         Mat4 comb = (traslationMatrix.multiply(rotationMatrix)).multiply(scaleMatrix);
         return comb;
     }
 
-    public void render(Mat4 combined) {
+    public void render(Camera camera) {
         if (texture != null) {
-            texture.bind();
+            texture.bind(shader);
         }
         shader.bind();
-        shader.setUniformMat4f("pr_matrix", combined.multiply(getModel()));
+        if (drawMode == SKYBOX) {
+            traslationMatrix = new Mat4(1.0f);
+            traslationMatrix = traslationMatrix.translate(camera.position);
+            shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
+        } else {
+            shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
+        }
         mesh.render();
         shader.unbind();
     }
@@ -61,5 +81,6 @@ abstract public class Entity implements Disposable {
     @Override
     public void dispose() {
         mesh.dispose();
+
     }
 }
