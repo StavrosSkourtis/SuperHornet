@@ -34,22 +34,22 @@ public class ModelLoader {
             String line;
 
             while ((line = br.readLine()) != null) {
-                String[] lineArgs = line.split(" ");
-                if (line.startsWith("v")) {
+                String[] lineArgs = line.split("\\s+");
+                if (line.startsWith("v ")) {
                     vertex.add(new Vec3(
                             Float.parseFloat(lineArgs[1]),
                             Float.parseFloat(lineArgs[2]),
                             Float.parseFloat(lineArgs[3])));
-                } else if (line.startsWith("vn")) {
+                } else if (line.startsWith("vn ")) {
                     vertexNormal.add(new Vec3(
                             Float.parseFloat(lineArgs[1]),
                             Float.parseFloat(lineArgs[2]),
                             Float.parseFloat(lineArgs[3])));
-                } else if (line.startsWith("vt")) {
+                } else if (line.startsWith("vt ")) {
                     textureCoord.add(new Vec2(
                             Float.parseFloat(lineArgs[1]),
                             Float.parseFloat(lineArgs[2])));
-                } else if (line.startsWith("f")) {
+                } else if (line.startsWith("f ")) {
                     String[] faceArgs1 = lineArgs[1].split("/");
 
                     String[] faceArgs2 = lineArgs[2].split("/");
@@ -74,6 +74,7 @@ public class ModelLoader {
                             )));
                 }
             }
+            br.close();
             
             List<Vec3> indeces = new LinkedList<>();
             for(int i=0 ; i < faces.size() ; i++){

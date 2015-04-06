@@ -11,16 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Window.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Camera.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/input/Keyboard.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/Launcher.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/utils/FpsCounter.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Screen.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/models/Skybox.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/input/Mouse.java</file>
-            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/screen/StartScreen.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ package net.skourti.superhornet.graphics;
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
+import org.lwjgl.opengl.GL11;
 
 /**
  *
@@ -68,6 +69,7 @@ abstract public class Entity implements Disposable {
         }
         shader.bind();
         if (drawMode == SKYBOX) {
+            GL11.glDepthFunc(0);
             traslationMatrix = new Mat4(1.0f);
             traslationMatrix = traslationMatrix.translate(camera.position);
             shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
@@ -75,6 +77,9 @@ abstract public class Entity implements Disposable {
             shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
         }
         mesh.render();
+        if(drawMode == SKYBOX){
+            GL11.glDepthFunc(1);
+        }            
         shader.unbind();
     }
 
