@@ -6,7 +6,7 @@
 package net.skourti.superhornet.screen;
 
 import com.hackoeur.jglm.Vec3;
-import net.skourti.superhornet.graphics.Entity;
+import net.skourti.superhornet.graphics.Model;
 import net.skourti.superhornet.graphics.Screen;
 import net.skourti.superhornet.graphics.ShaderProgram;
 import net.skourti.superhornet.graphics.Texture;
@@ -31,10 +31,8 @@ public class StartScreen extends Screen {
         camera.lookAt(new Vec3(0, 0, 4), new Vec3(0, 0, 0), new Vec3(0, 1, 0));
         camera.mouseControl = true;
 
-        Jet jet = new Jet();
-
-        addEntity(jet);
-       
+        Jet jet = new Jet(this);
+ 
     }
 
     @Override

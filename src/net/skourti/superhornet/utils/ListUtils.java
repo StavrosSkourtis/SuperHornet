@@ -138,4 +138,15 @@ public class ListUtils {
             uv[i] = 1.0f - uv[i];
         }
     }
+    public static void uv2Invert(float [] uv){
+        for (int i = 0; i < uv.length; i += 2) {
+            uv[i] = 1.0f - uv[i];
+        }
+    }
+    
+    public static void absolute(float [] uv){
+        for (int i = 0; i < uv.length; i ++) {
+            uv[i] = uv[i]<0?-uv[i]:uv[i];
+        }
+    }
 }

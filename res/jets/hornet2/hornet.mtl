@@ -1,0 +1,43 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl glass
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\Copy\Code\Personal\SuperHornet\res\jets\fa18superhornet\Glass_Cockpit.png
+
+newmtl pilot
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\Copy\Code\Personal\SuperHornet\res\jets\fa18superhornet\Pilot_usa.png
+
+newmtl plane
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\Copy\Code\Personal\SuperHornet\res\jets\fa18superhornet\FA-18E_SuperHornet_P01.png
+map_Bump E:\\Copy\\Code\\Personal\\SuperHornet\\res\\jets\\fa18superhornet\\FA-18E_SuperHornet_N.png
+
+newmtl seat
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd E:\Copy\Code\Personal\SuperHornet\res\jets\fa18superhornet\Eject_Seat.png

@@ -5,7 +5,10 @@
  */
 package net.skourti.superhornet.models;
 
-import net.skourti.superhornet.graphics.Entity;
+import com.hackoeur.jglm.Vec3;
+import net.skourti.superhornet.graphics.Model;
+import net.skourti.superhornet.graphics.Mesh;
+import net.skourti.superhornet.graphics.Screen;
 import net.skourti.superhornet.graphics.ShaderProgram;
 import net.skourti.superhornet.graphics.Texture;
 import net.skourti.superhornet.utils.objparser.ObjLoader;
@@ -14,24 +17,22 @@ import net.skourti.superhornet.utils.objparser.ObjLoader;
  *
  * @author Stavros
  */
-public class Jet extends Entity {
+public class Jet {
 
-    @Override
-    public void create() {
+    public Jet(Screen screen) {
         ObjLoader loader = new ObjLoader();
         
-        mesh = loader.load("res/jets/fa18superhornet/FA-18E_SuperHornet.obj");
-        texture = new Texture("res/jets/fa18superhornet/FA-18E_SuperHornet_P01.png");
+        //screen.addEntity(loader.load("res/farm/house.obj"));
+        //screen.addEntity(loader.load("res/jets/fa22raptor/FA-22_Raptor.obj"));
+        //screen.addEntity(loader.load("res/jets/cube.obj"));
+        //screen.addEntity(loader.load("res/Knife/sword.obj"));
         
         
-        //mesh = loader.load("E:/Copy/Code/Personal/SuperHornet/res/jets/fa22raptor/FA-22_Raptor.obj");
-        //texture = new Texture("E:/Copy/Code/Personal/SuperHornet/res/jets/fa22raptor/FA-22_Raptor_P01.png");
+        Model hornet = loader.load("res/jets/fa18superhornet/FA-18E_SuperHornet.obj");
+        hornet.rotate(-1f, new Vec3(1,0,0));
+        hornet.translate(new Vec3(0 , 0 , -20));
+        screen.addEntity(hornet);
         
-          
-        //mesh = loader.load("E:/Copy/Code/Personal/SuperHornet/res/cube.obj");
-        //texture = new Texture("E:/Copy/Code/Personal/SuperHornet/res/jets/sphere/sphere.jpg");
-        
-        shader = ShaderProgram.textureShader;
     }
 
 }

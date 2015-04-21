@@ -12,9 +12,14 @@ import com.hackoeur.jglm.Vec3;
  * @author Stavros
  */
 public class Material {
+    public String name;
     public Vec3 ka;
     public Vec3 kd;
     public Vec3 ks;
-    public int illum;
-    public int ns;
+    public float illum;
+    public float ns;
+    public String mapKd;
+    public String map_bump;
+    public String bump;
+    public String map_opacity;
 }

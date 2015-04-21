@@ -17,19 +17,23 @@ import static org.lwjgl.opengl.GL30.*;
  */
 public class Mesh implements Disposable {
     
-    
+    private Texture texture;
     private int vao, vbo, ibo, tbo, cbo, nbo;
     private int count;
 
     public Mesh() {
         vao = vbo = ibo = tbo = cbo = nbo = -1;
     }
-
-    public Mesh(int count) {
-        this.count = count;
-        vao = glGenVertexArrays();
-    }
-
+    
+    /**
+     * Creates a mesh with the given parameters
+     * vertices array cannot be null , the others can
+     * @param vertices
+     * @param color
+     * @param normals
+     * @param uv
+     * @param indices 
+     */
     public void create(float[] vertices, float[] color, float[] normals, float[] uv, int[] indices) {
         if (indices != null) {
             count = indices.length;
@@ -99,15 +103,24 @@ public class Mesh implements Disposable {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
+    
+    public void setTexture(Texture texture){
+        this.texture = texture;
+    }
 
-
+    /**
+     * Binds vertex array buffer
+     */
     public void bind() {
         glBindVertexArray(vao);
         if (ibo > 0) {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         }
     }
-
+    
+    /**
+     * Unbinds vertex array buffer
+     */
     public void unbind() {
         if (ibo > 0) {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -115,20 +128,34 @@ public class Mesh implements Disposable {
 
         glBindVertexArray(0);
     }
-
+    
+    /**
+     * Draws the mesh
+     */
     public void draw() {
+        
         if (ibo > 0) {
             glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
         } else {
             glDrawArrays(GL_TRIANGLES, 0, count);
         }
     }
-
-    public void render() {
+    
+    /**
+     * renders the mesh
+     */
+    public void render(ShaderProgram shader) {
+        if (texture != null) {
+            texture.bind(shader);
+        }
         bind();
         draw();
     }
-
+    
+    
+    /**
+     * Disposes the mesh
+     */
     @Override
     public void dispose() {
         unbind();
@@ -144,6 +171,9 @@ public class Mesh implements Disposable {
         if (cbo > 0) {
             glDeleteBuffers(cbo);
         }
+        if (nbo > 0 ){
+            glDeleteBuffers(nbo);
+        }  
     }
 
 }

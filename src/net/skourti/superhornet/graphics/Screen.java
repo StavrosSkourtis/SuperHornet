@@ -19,7 +19,7 @@ abstract public class Screen implements Disposable {
     public static final int COLOR_SHADER = 0;
     public static final int TEXTURE_SHADER = 1;
 
-    private final LinkedList<Entity> entities;
+    private final LinkedList<Model> entities;
     
     public final Camera camera;
 
@@ -70,7 +70,7 @@ abstract public class Screen implements Disposable {
         glClearColor(r, g, b, a);
     }
 
-    public void addEntity(Entity entity) {
+    public void addEntity(Model entity) {
         entities.add(entity);
     }
 

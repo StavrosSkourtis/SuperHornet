@@ -18,6 +18,7 @@ import main.java.com.hackoeur.jglm.Vec2;
 public class ObjParser {
 
     private ObjLoader loader;
+    private String currentGroup;
 
     public void parse(ObjLoader loader, File file) {
         this.loader = loader;
@@ -34,7 +35,10 @@ public class ObjParser {
              */
             while ((line = reader.readLine()) != null) {
 
-                if (line.startsWith("v ")) {
+                if (line.startsWith("g ") || line.startsWith("o ")) {
+                    // create a new group
+                    createNewGroup(line);
+                } else if (line.startsWith("v ")) {
                     // line contains vertex positions
                     parseVertex(line);
                 } else if (line.startsWith("vt ")) {
@@ -46,6 +50,12 @@ public class ObjParser {
                 } else if (line.startsWith("f")) {
                     // line containts a face
                     parseFace(line);
+                } else if (line.startsWith("mtllib")) {
+                    // load material file
+                    loadMaterialFile(file, line);
+                } else if (line.startsWith("usemtl")) {
+                    // set the current group to use the specified material
+                    useMaterial(line);
                 } else {
                     ignored++;
                 }
@@ -129,6 +139,47 @@ public class ObjParser {
 
         Vec3 v3 = new Vec3(x, y, z);
 
-        loader.faces.add(new Face(v1, v2, v3));
+        loader.data.get(currentGroup).faces.add(new Face(v1, v2, v3));
+    }
+
+    /**
+     * Loads the materials from the .mtl file
+     *
+     * @param file
+     * @param line
+     */
+    public void loadMaterialFile(File file, String line) {
+        String args[] = line.split("\\s+");
+
+        MtlParser parser = new MtlParser();
+        
+        loader.materials = parser.parse(file.getParentFile().getAbsolutePath() + "/" + args[1]);
+        
+    }
+
+    /**
+     * Creates a new group
+     *
+     * @param line
+     */
+    public void createNewGroup(String line) {
+        String args[] = line.split("\\s+");
+
+        ObjDataGroup group = new ObjDataGroup();
+        currentGroup = args[1];
+        loader.groups.add(args[1]);
+        loader.data.put(args[1], group);
+    }
+    
+    
+    /**
+     * set the material of the current group
+     * @param line 
+     */
+    public void useMaterial(String line){
+        String args[] = line.split("\\s+");
+        
+        
+        loader.data.get(currentGroup).material = args[1];
     }
 }
