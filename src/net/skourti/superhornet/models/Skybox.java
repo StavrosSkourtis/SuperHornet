@@ -39,11 +39,11 @@ public class Skybox {
                     1, 1
                 };
 
-                byte[] indeces = {
+                int[] indeces = {
                     0, 1, 2, 2, 3, 0,};
 
-                mesh.createTexturedMesh(vetices, indeces, uv);
-                shader = ShaderProgram.basic;
+                mesh.create(vetices,null , null, uv,indeces);
+                shader = ShaderProgram.textureShader;
                 texture = new Texture("res/sky/"+box+"_front.jpg");
                 drawMode = SKYBOX;
             }
@@ -66,11 +66,11 @@ public class Skybox {
                     0, 1
                 };
 
-                byte[] indeces = {
+                int[] indeces = {
                     0, 1, 2, 2, 3, 0,};
 
-                mesh.createTexturedMesh(vetices, indeces, uv);
-                shader = ShaderProgram.basic;
+                mesh.create(vetices,null , null, uv,indeces);
+                shader = ShaderProgram.textureShader;
                 texture = new Texture("res/sky/"+box+"_back.jpg");
                 drawMode = SKYBOX;
             }
@@ -93,11 +93,11 @@ public class Skybox {
                     1, 1
                 };
 
-                byte[] indeces = {
+                int[] indeces = {
                     0, 1, 2, 2, 3, 0,};
 
-                mesh.createTexturedMesh(vetices, indeces, uv);
-                shader = ShaderProgram.basic;
+                mesh.create(vetices,null , null, uv,indeces);
+                shader = ShaderProgram.textureShader;
                 texture = new Texture("res/sky/"+box+"_right.jpg");
                 drawMode = SKYBOX;
             }
@@ -120,11 +120,11 @@ public class Skybox {
                     0, 1
                 };
 
-                byte[] indeces = {
+                int[] indeces = {
                     0, 1, 2, 2, 3, 0,};
 
-                mesh.createTexturedMesh(vetices, indeces, uv);
-                shader = ShaderProgram.basic;
+                mesh.create(vetices,null , null, uv,indeces);
+                shader = ShaderProgram.textureShader;
                 texture = new Texture("res/sky/"+box+"_left.jpg");
                 drawMode = SKYBOX;
             }
@@ -148,11 +148,11 @@ public class Skybox {
                     1, 0,
                     0, 0};
 
-                byte[] indeces = {
+                int[] indeces = {
                     0, 1, 2, 2, 3, 0,};
 
-                mesh.createTexturedMesh(vetices, indeces, uv);
-                shader = ShaderProgram.basic;
+                mesh.create(vetices,null , null, uv,indeces);
+                shader = ShaderProgram.textureShader;
                 texture = new Texture("res/sky/"+box+"_top.jpg");
                 drawMode = SKYBOX;
             }

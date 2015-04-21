@@ -14,41 +14,128 @@ import main.java.com.hackoeur.jglm.Vec2;
  * @author Stavros
  */
 public class ListUtils {
-    
-    
-    public static float[] vec3ListToFloat(List<Vec3> list){
-        float [] array = new float[list.size()*3];
+
+    /**
+     * Converts a list of 3d vectors to float array
+     * @param list
+     * @return 
+     */
+    public static float[] vec3ListToFloat(List<Vec3> list) {
+        float[] array = new float[list.size() * 3];
+
         
-        System.out.println(array.length);
-        for(int i=0; i < list.size(); i+=3){
-            array [i] = list.get(i).x;
-            array [i+1] = list.get(i).y;
-            array [i+2] = list.get(i).z;
+        int j = 0;
+        for (int i = 0; i < list.size(); i++) {
+            array[j] = list.get(i).x;
+            j++;
+            array[j] = list.get(i).y;
+            j++;
+            array[j] = list.get(i).z;
+            j++;
         }
-        
-        return array;        
+
+        return array;
     }
     
-    public static float[] vec2ListToFloat(List<Vec2> list){
-        float [] array = new float[list.size()*2];
+    /**
+     * Converts a list of 2d vectors to a float array
+     * @param list
+     * @return 
+     */
+    public static float[] vec2ListToFloat(List<Vec2> list) {
+        float[] array = new float[list.size() * 2];
+
         
-        for(int i=0; i < list.size(); i+=2){
-            array [i] = list.get(i).x;
-            array [i+1] = list.get(i).y;
+        int j = 0;
+        for (int i = 0; i < list.size(); i++) {
+            array[j] = list.get(i).x;
+            j++;
+            array[j] = list.get(i).y;
+            j++;
         }
-        
-        return array;        
+
+        return array;
     }
     
-    public static byte[] vec3ListToByte(List<Vec3> list){
-        byte [] array = new byte[list.size()*3];
-        
-        for(int i=0; i < list.size(); i+=3){
-            array [i] = (byte)list.get(i).x;
-            array [i+1] =(byte)list.get(i).y;
-            array [i+2] = (byte)list.get(i).z;
+    /**
+     * Converts a list of bytes to a byte array
+     * @param list
+     * @return 
+     */
+    public static byte[] listToByte(List<Byte> list) {
+        byte[] bytes = new byte[list.size()];
+
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = list.get(i);
         }
-        
-        return array; 
+
+        return bytes;
+    }
+    
+    
+    /**
+     * Converts a list of integers to a integer array
+     * @param list
+     * @return 
+     */
+    public static int[] listToInt(List<Integer> list) {
+        int[] ints = new int[list.size()];
+
+        for (int i = 0; i < ints.length; i++) {
+            ints[i] = list.get(i);
+        }
+
+        return ints;
+    }
+    
+    
+    /**
+     * converts a list of floats to a float array
+     * @param list
+     * @return 
+     */
+    public static float[] listToFloat(List<Float> list) {
+        float[] floats = new float[list.size()];
+
+        for (int i = 0; i < floats.length; i++) {
+            floats[i] = list.get(i);
+        }
+
+        return floats;
+    }
+
+    /**
+     * prints an array of floats
+     * @param array 
+     */
+    public static void print(float[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
+    
+    /**
+     * prints an array of integers
+     * @param array 
+     */
+    public static void print(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
+    
+    /**
+     * used for texture coordinate to invert the y value
+     *
+     * @param uv
+     */
+    public static void uvInvert(float[] uv) {
+        for (int i = 1; i < uv.length; i += 2) {
+            uv[i] = 1.0f - uv[i];
+        }
     }
 }

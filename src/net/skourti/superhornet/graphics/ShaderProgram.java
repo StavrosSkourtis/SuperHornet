@@ -27,17 +27,17 @@ public final class ShaderProgram implements Disposable {
     
     public static ShaderProgram modelShader;
     public static ShaderProgram colorShader;
-    public static ShaderProgram basic;
+    public static ShaderProgram textureShader;
     
     public static void loadAll(){
         colorShader = new ShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
-        basic = new ShaderProgram("shaders/basic_v.glsl","shaders/basic_f.glsl");
+        textureShader = new ShaderProgram("shaders/basic_v.glsl","shaders/basic_f.glsl");
         modelShader = new ShaderProgram("shaders/model_v.glsl","shaders/model_f.glsl");
     }
     
     public static void disposeAll(){
         colorShader.dispose();
-        basic.dispose();
+        textureShader.dispose();
         modelShader.dispose();
     }
     

@@ -20,7 +20,7 @@ abstract public class Entity implements Disposable {
     public static final int RELATIVE_MODEL = 1;
 
     public int drawMode;
-    public Model mesh;
+    public Mesh mesh;
     public Mat4 traslationMatrix;
     public Mat4 rotationMatrix;
     public Mat4 scaleMatrix;
@@ -33,7 +33,7 @@ abstract public class Entity implements Disposable {
         traslationMatrix = new Mat4(1.0f);
         rotationMatrix = new Mat4(1.0f);
         scaleMatrix = new Mat4(1.0f);
-        mesh = new Model();
+        mesh = new Mesh();
         create();
     }
 
