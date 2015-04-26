@@ -7,6 +7,7 @@ package net.skourti.superhornet;
 
 import net.skourti.superhornet.screen.StartScreen;
 import net.skourti.superhornet.graphics.Window;
+import net.skourti.superhornet.screen.TestScreen;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Launcher{
         Window window = new Window();
         
         window.addScreen("Start Screen",new StartScreen());
+        //window.addScreen("Test Screen",new TestScreen());
         
         window.create();
     }

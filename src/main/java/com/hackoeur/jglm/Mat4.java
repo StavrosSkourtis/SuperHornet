@@ -38,10 +38,10 @@ public final class Mat4 extends AbstractMat {
 	 * | C G K O |   | m02 m12 m22 m32 |
 	 * | D H L P |   | m03 m13 m23 m33 |
 	 */
-	final float m00, m10, m20, m30;
-	final float m01, m11, m21, m31;
-	final float m02, m12, m22, m32;
-	final float m03, m13, m23, m33;
+	public final float m00, m10, m20, m30;
+	public final float m01, m11, m21, m31;
+	public final float m02, m12, m22, m32;
+	public final float m03, m13, m23, m33;
 	
 	/**
 	 * Creates a matrix with all elements equal to ZERO.
@@ -426,6 +426,21 @@ public final class Mat4 extends AbstractMat {
             );
         }
         
+        public Vec3 multiply(final Vec3 vec) {            
+            return new Vec3(
+                    vec.x*m00+ vec.y*m10 + vec.z*m20 + m30, 
+                    vec.x*m01+ vec.y*m11 + vec.z*m21 + m31, 
+                    vec.x*m02+ vec.y*m12 + vec.z*m22 + m32);
+        }
+        
+        public Vec3 multiplyDirection(final Vec3 vec) {            
+            return new Vec3(
+                    vec.x*m00+ vec.y*m10 + vec.z*m20 , 
+                    vec.x*m01+ vec.y*m11 + vec.z*m21 , 
+                    vec.x*m02+ vec.y*m12 + vec.z*m22 );
+        }
+        
+        
         /**
          * Subtract other matrix from this one and return the result ( this - right )
          * @param right
@@ -472,7 +487,7 @@ public final class Mat4 extends AbstractMat {
             float [] mat = {
                 scale ,   0   ,   0   , 0,
                  0    , scale ,   0   , 0,
-                 0    ,   0   ,   1   , 0,
+                 0    ,   0   ,   scale   , 0,
                  0    ,   0   ,   0   , 1
             };
             

@@ -16,6 +16,8 @@ import static org.lwjgl.opengl.GL30.*;
  * @author Stavros
  */
 public class Mesh implements Disposable {
+    float [] vertices,color,normals,uv;
+    int [] indices;
     
     private Texture texture;
     private int vao, vbo, ibo, tbo, cbo, nbo;
@@ -35,6 +37,12 @@ public class Mesh implements Disposable {
      * @param indices 
      */
     public void create(float[] vertices, float[] color, float[] normals, float[] uv, int[] indices) {
+        this.vertices = vertices;
+        this.color = color;
+        this.normals = normals;
+        this.uv = uv;
+        this.indices = indices;
+        
         if (indices != null) {
             count = indices.length;
         } else {

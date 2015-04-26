@@ -5,10 +5,18 @@
  */
 package net.skourti.superhornet.graphics;
 
+import com.bulletphysics.dynamics.RigidBody;
+import com.bulletphysics.linearmath.MatrixUtil;
+import com.bulletphysics.linearmath.Transform;
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Matrices;
 import com.hackoeur.jglm.Vec3;
 import java.util.LinkedList;
+import javax.vecmath.Matrix4f;
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import net.skourti.superhornet.utils.ListUtils;
+import net.skourti.superhornet.utils.MatrixConverter;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -19,7 +27,8 @@ public class Model implements Disposable {
 
     public static final int SKYBOX = 0;
     public static final int RELATIVE_MODEL = 1;
-
+    
+    public RigidBody body;
     public int drawMode;
     public LinkedList<Mesh> meshes;
     public Mat4 traslationMatrix;
@@ -35,19 +44,19 @@ public class Model implements Disposable {
         scaleMatrix = new Mat4(1.0f);
         meshes = new LinkedList<>();
         create();
+        
     }
 
     public void create(){}
 
     public void rotate(float angle, Vec3 axis) {
-        this.angle += angle;
-
-        rotationMatrix = Matrices.rotate(this.angle, axis);
+        //this.angle += angle;
+        rotationMatrix = rotationMatrix.multiply(Matrices.rotate(angle, axis));
     }
 
     public void setAngle(float angle, Vec3 axis) {
-        this.angle = angle;
-        rotationMatrix = Matrices.rotate(this.angle, axis);
+        //this.angle = angle;
+        //rotationMatrix = Matrices.rotate(this.angle, axis);
     }
 
     public void translate(Vec3 position) {
@@ -57,9 +66,18 @@ public class Model implements Disposable {
     public void scale(float ammount) {
         scaleMatrix = scaleMatrix.scale(ammount);
     }
-
+    
     public Mat4 getModel() {
-        Mat4 comb = (traslationMatrix.multiply(rotationMatrix)).multiply(scaleMatrix);
+        Mat4 comb = null;
+        if(body !=null){
+            float matrix [] = new float[16];
+            
+            body.getWorldTransform(new Transform()).getOpenGLMatrix(matrix);
+            
+           
+            comb = new Mat4(matrix);
+        }else
+            comb = (traslationMatrix.multiply(rotationMatrix)).multiply(scaleMatrix);
         return comb;
     }
 
@@ -94,5 +112,16 @@ public class Model implements Disposable {
     
     public void addMesh(Mesh mesh){
         meshes.add(mesh);
+    }
+    
+    public float[] getVertices(){
+        LinkedList<Float> v = new LinkedList<>();
+        
+        for (int i = 0; i < meshes.size(); i++) {
+            ListUtils.append(v,meshes.get(i).vertices);
+        }
+        
+        return ListUtils.listToFloat(v);
+        
     }
 }

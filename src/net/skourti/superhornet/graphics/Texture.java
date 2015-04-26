@@ -26,8 +26,16 @@ public class Texture {
     private int width, height;
     public int texture;
     public int glTexture;
+    public int mode;
 
     public Texture(String path) {
+        texture = load(path);
+        glTexture = glTextureCounter++;
+        mode = GL_CLAMP_TO_EDGE;
+    }
+    
+    public Texture(String path,int mode) {
+        this.mode = mode;
         texture = load(path);
         glTexture = glTextureCounter++;
     }
@@ -59,8 +67,8 @@ public class Texture {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mode);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mode);
         
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, BufferUtils.createIntBuffer(data));
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -70,6 +78,8 @@ public class Texture {
     public void bind(ShaderProgram shader) {
         shader.setUniform1i("tex", glTexture - GL_TEXTURE0);
         glActiveTexture(glTexture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mode);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mode);
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 

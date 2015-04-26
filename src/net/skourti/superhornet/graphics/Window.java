@@ -75,6 +75,7 @@ public class Window implements Disposable {
             
             currentScreen.logic();
             currentScreen.render(window, delta);
+            
             FpsCounter.count();
         }
 

@@ -5,8 +5,11 @@
  */
 package net.skourti.superhornet.utils;
 
+import com.bulletphysics.util.ObjectArrayList;
 import com.hackoeur.jglm.Vec3;
+import java.util.LinkedList;
 import java.util.List;
+import javax.vecmath.Vector3f;
 import main.java.com.hackoeur.jglm.Vec2;
 
 /**
@@ -148,5 +151,19 @@ public class ListUtils {
         for (int i = 0; i < uv.length; i ++) {
             uv[i] = uv[i]<0?-uv[i]:uv[i];
         }
+    }
+
+    public static void append(LinkedList<Float> v, float[] vertices) {
+        for(int i=0; i <vertices.length ; i++)
+            v.add(vertices[i]);
+    }
+    
+    public static ObjectArrayList<Vector3f> arrayToVector3fList(float array[]){
+        ObjectArrayList<Vector3f> list = new ObjectArrayList<>();
+        
+        for(int i=0; i<array.length ; i+=3)
+            list.add(new Vector3f(array[i], array[i+1], array[i+2]));            
+        
+        return list;
     }
 }

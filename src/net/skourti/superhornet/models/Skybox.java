@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL13;
 public class Skybox {
 
     public Skybox(Screen screen ) {
-        final float d =1;
+        final float d =10000;
         String box = "alpine";
         
         Model skybox = new Model() {
