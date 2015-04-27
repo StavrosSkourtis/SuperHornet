@@ -1,0 +1,44 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl glass
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+Glass_Cockpit.png
+
+newmtl pilot
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd FA-18E_SuperHornet_P01.png
+map_Bump FA-18E_SuperHornet_N.png
+
+newmtl plane
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Pilot_usa.png
+
+
+newmtl seat
+Ns 5.882353
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.752941 0.752941 0.752941
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Eject_Seat.png

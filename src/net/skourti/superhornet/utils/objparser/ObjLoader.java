@@ -18,6 +18,7 @@ import net.skourti.superhornet.graphics.Model;
 import net.skourti.superhornet.graphics.ShaderProgram;
 import net.skourti.superhornet.graphics.Texture;
 import net.skourti.superhornet.utils.ListUtils;
+import org.lwjgl.opengl.GL11;
 
 /**
  *
@@ -75,7 +76,7 @@ public class ObjLoader {
         parser.parse(this, file);
 
         Model model = new Model();
-        model.useShader(ShaderProgram.textureShader);
+        model.useShader(ShaderProgram.modelShader);
 
         for (String group : groups) {
             ObjDataGroup d = data.get(group);
@@ -89,8 +90,8 @@ public class ObjLoader {
             float n[] = ListUtils.vec3ListToFloat(finalNorm);
             float t[] = ListUtils.vec2ListToFloat(finalText);
             
-            ListUtils.absolute(t);
-            
+            //ListUtils.absolute(t);
+            ListUtils.uvInvert(t);
             
             mesh.create(v, null, n, t, null);
 
@@ -101,7 +102,7 @@ public class ObjLoader {
                 String texturePath = temp.mapKd;
                 
                 System.out.println(texturePath);
-                mesh.setTexture(new Texture(texturePath));
+                mesh.setTexture(new Texture(texturePath,GL11.GL_REPEAT));
             } catch (NullPointerException ex) {
                
             }

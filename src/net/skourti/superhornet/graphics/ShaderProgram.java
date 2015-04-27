@@ -58,7 +58,7 @@ public final class ShaderProgram implements Disposable {
         this();
         attachVertexShader(vertexShader);
         attachFragmentShader(fragmentShader);
-
+        
         link();
     }
 

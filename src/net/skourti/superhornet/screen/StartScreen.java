@@ -25,20 +25,20 @@ import org.lwjgl.glfw.GLFW;
  * @author Stavros
  */
 public class StartScreen extends Screen {
+
     Jet jet;
+
     @Override
     public void create() {
-        
-        new Skybox(this);
-        //new Terrain(this);
-        new Ground(this);
-        
 
-        //camera.lookAt(new Vec3(0, 2, 15), new Vec3(0, 0, -20), new Vec3(0, 1, 0));
-        //camera.mouseControl = true;
-        
+        new Skybox(this);
+        new Ground(this);
+
+//        camera.lookAt(new Vec3(0, 100, 15), new Vec3(0, 100, -20), new Vec3(0, 1, 0));
+//        camera.mouseControl = true;
         jet = new Jet(this);
- 
+        
+        
     }
 
     @Override
@@ -56,47 +56,50 @@ public class StartScreen extends Screen {
         jetControl();
         positionCameraBehindJet();
     }
-    
+
     Vec3 camPo = new Vec3(0, -20, 8);
-    public void positionCameraBehindJet(){
+
+    public void positionCameraBehindJet() {
         Vec3 pos = jet.getModelMatrix().multiply(camPo);
-        Vec3 look = jet.getModelMatrix().multiply( jet.frontLookPoint);
-        
+        Vec3 look = jet.getModelMatrix().multiply(jet.frontLookPoint);
+
 //        System.out.println("Pos x:"+pos.x+" y:"+pos.y+" z:"+pos.z+" Target x:"+look.x+" y:"+look.y+" z:"+look.z);
 //        System.out.println(jet.getModelMatrix());
-        camera.lookAt( pos, look , new Vec3(0, 1, 0));
-        
+        camera.lookAt(pos, look, new Vec3(0, 1, 0));
+
     }
-    
-    
-    public void jetControl(){
-        
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_W)){
-            jet.force(0, 90000, 0);
+
+    public void jetControl() {
+
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_W)) {
+            jet.engineThrotle(500000);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_A)){
-            jet.forceFront(-90000, 0, 0);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_A)) {
+            jet.forceFront(-30000, 0, 0);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_D)){
-            jet.forceFront(90000, 0, 0);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_D)) {
+            jet.forceFront(30000, 0, 0);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_S)){
-            jet.force(0, -90000,0);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_S)) {
+            jet.engineThrotle(-50000);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_DOWN)){
-            jet.forceFront(0, 0,  90000);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_DOWN)) {
+            jet.forceFront(0, 0, 90000);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_UP)){
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_UP)) {
             jet.forceFront(0, 0, -90000);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT)){
-            jet.forceRightSide(0, 0, 10000);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT)) {
+            jet.forceRightSide(0, 0, 30000);
         }
-        if(Keyboard.isKeyDown(GLFW.GLFW_KEY_RIGHT)){
-            jet.forceLeftSide(0, 0, 10000);
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_RIGHT)) {
+            jet.forceLeftSide(0, 0, 30000);
         }
-        jet.force(0, 0, 30000);
-        jet.stabilize();
+        if( Keyboard.isKeyDown(GLFW.GLFW_KEY_P)){
+            jet.enginePower();
+        }
+       
+        jet.engineThrust();
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package net.skourti.superhornet.graphics;
 
+import com.hackoeur.jglm.Mat4;
+import com.hackoeur.jglm.Vec3;
 import net.skourti.superhornet.utils.BufferUtils;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -22,6 +24,15 @@ public class Mesh implements Disposable {
     private Texture texture;
     private int vao, vbo, ibo, tbo, cbo, nbo;
     private int count;
+    
+    /*
+        for lighting and stuff like that
+    */
+    public Vec3 ka;
+    public Vec3 kd;
+    public Vec3 ks;
+    public float illum;
+    public float ns;
 
     public Mesh() {
         vao = vbo = ibo = tbo = cbo = nbo = -1;
@@ -152,7 +163,13 @@ public class Mesh implements Disposable {
     /**
      * renders the mesh
      */
-    public void render(ShaderProgram shader) {
+    public void render(ShaderProgram shader,Camera camera,Mat4 model) {
+        if(nbo>=0){
+            
+            shader.setUniformMat4f("V", camera.viewMatrix);
+            shader.setUniformMat4f("M", model);
+            shader.setUniform3f("LightPosition_worldspace", new Vec3(165000, 165000, 165000));
+        }
         if (texture != null) {
             texture.bind(shader);
         }

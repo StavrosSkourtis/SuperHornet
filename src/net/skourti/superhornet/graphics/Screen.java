@@ -31,6 +31,7 @@ abstract public class Screen implements Disposable {
 
     public static final int COLOR_SHADER = 0;
     public static final int TEXTURE_SHADER = 1;
+    
 
     private final LinkedList<Model> entities;
     RigidBody body ;
@@ -94,7 +95,7 @@ abstract public class Screen implements Disposable {
     public void addEntity(Model entity) {
         entities.add(entity);
         if(entity.body!=null)
-            physicsWorld.addRigidBody(entity.body);
+           physicsWorld.addRigidBody(entity.body);
     }
 
     /**

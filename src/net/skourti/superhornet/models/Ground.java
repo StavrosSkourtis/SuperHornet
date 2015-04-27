@@ -47,11 +47,11 @@ public class Ground {
                 null, null,
                 new float[]{
                     0, 0,// down left
-                    0, size/100,// up left
-                    size/100, 0,// down right
-                    size/100, 0,// down right
-                    size/100, size/100,// up right
-                    0, size/100,// up left
+                    0, size/50,// up left
+                    size/50, 0,// down right
+                    size/50, 0,// down right
+                    size/50, size/50,// up right
+                    0, size/50,// up left
                 },
                 null
         );

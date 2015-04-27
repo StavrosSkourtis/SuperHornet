@@ -88,11 +88,12 @@ public class Model implements Disposable {
             traslationMatrix = new Mat4(1.0f);
             traslationMatrix = traslationMatrix.translate(camera.position);
             shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
+            
         } else {
             shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
         }
         for( int i = 0 ; i<meshes.size() ; i ++)
-            meshes.get(i).render(shader);
+            meshes.get(i).render(shader,camera,getModel());
         if (drawMode == SKYBOX) {
             GL11.glDepthFunc(1);
         }
