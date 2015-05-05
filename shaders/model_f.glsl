@@ -8,7 +8,7 @@ in vec3 EyeDirection_cameraspace;
 in vec3 LightDirection_cameraspace;
 
 // Ouput data
-out vec3 color;
+out vec4 color;
 
 // Values that stay constant for the whole mesh.
 uniform sampler2D tex;
@@ -25,7 +25,7 @@ void main(){
 	// Material properties
 	vec3 MaterialDiffuseColor = texture2D( tex, UV ).rgb;
 	vec3 MaterialAmbientColor = vec3(0.25,0.25,0.25) * MaterialDiffuseColor;
-	vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
+	vec3 MaterialSpecularColor = vec3(0.4,0.4,0.4);
 
 	// Distance to the light
 	float distance = length( LightPosition_worldspace - Position_worldspace );
@@ -51,6 +51,8 @@ void main(){
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
-	color =  MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
-
+	vec3 tempColor =  MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
+        
+        vec4 tempColor2 = texture( tex, UV );
+        color = vec4(tempColor.x , tempColor.y, tempColor.z ,tempColor2.w );
 }

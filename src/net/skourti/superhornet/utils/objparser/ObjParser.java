@@ -34,7 +34,6 @@ public class ObjParser {
              Loop through every line in the file
              */
             while ((line = reader.readLine()) != null) {
-
                 if (line.startsWith("g ") || line.startsWith("o ")) {
                     // create a new group
                     createNewGroup(line);
@@ -55,6 +54,7 @@ public class ObjParser {
                     loadMaterialFile(file, line);
                 } else if (line.startsWith("usemtl")) {
                     // set the current group to use the specified material
+                    
                     useMaterial(line);
                 } else {
                     ignored++;
@@ -179,6 +179,8 @@ public class ObjParser {
     public void useMaterial(String line){
         String args[] = line.split("\\s+");
         
+        if(loader.data.get(currentGroup).material !=null)
+            createNewGroup(line);
         
         loader.data.get(currentGroup).material = args[1];
     }

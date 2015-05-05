@@ -112,11 +112,8 @@ abstract public class Screen implements Disposable {
     }
 
     abstract public void create();
-
     abstract public void resume();
-
     abstract public void pause();
-
     abstract public void logic();
 
 }

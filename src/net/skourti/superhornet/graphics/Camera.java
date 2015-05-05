@@ -93,16 +93,16 @@ public class Camera {
         
         up = direction.cross(right);
         
-        if (Keyboard.isKeyDownRepeat(GLFW.GLFW_KEY_UP)) {
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_UP)) {
             position = position.add((direction.multiply(Window.delta)).multiply(speed));
         }
-        if (Keyboard.isKeyDownRepeat(GLFW.GLFW_KEY_DOWN)) {
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_DOWN)) {
             position = position.subtract((direction.multiply(Window.delta)).multiply(speed));
         }
-        if (Keyboard.isKeyDownRepeat(GLFW.GLFW_KEY_LEFT)) {
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT)) {
             position = position.subtract((right.multiply(Window.delta)).multiply(speed));
         }
-        if (Keyboard.isKeyDownRepeat(GLFW.GLFW_KEY_RIGHT)) {
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_RIGHT)) {
             position = position.add((right.multiply(Window.delta)).multiply(speed));
         }
     }

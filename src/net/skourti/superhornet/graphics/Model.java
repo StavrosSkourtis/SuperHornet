@@ -34,6 +34,7 @@ public class Model implements Disposable {
     public Mat4 traslationMatrix;
     public Mat4 rotationMatrix;
     public Mat4 scaleMatrix;
+    public Mat4 modelMatrix;
     public float angle;
     private ShaderProgram shader;
 
@@ -68,6 +69,9 @@ public class Model implements Disposable {
     }
     
     public Mat4 getModel() {
+        if(modelMatrix !=null)
+            return modelMatrix;
+        
         Mat4 comb = null;
         if(body !=null){
             float matrix [] = new float[16];
@@ -80,7 +84,13 @@ public class Model implements Disposable {
             comb = (traslationMatrix.multiply(rotationMatrix)).multiply(scaleMatrix);
         return comb;
     }
-
+    
+    
+    
+    public void setModel(Mat4 model){
+        this.modelMatrix = model;
+    }
+    
     public void render(Camera camera) {
         shader.bind();
         if (drawMode == SKYBOX) {
@@ -92,8 +102,9 @@ public class Model implements Disposable {
         } else {
             shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(getModel()));
         }
-        for( int i = 0 ; i<meshes.size() ; i ++)
+        for( int i = 0 ; i<meshes.size() ; i ++){
             meshes.get(i).render(shader,camera,getModel());
+        }
         if (drawMode == SKYBOX) {
             GL11.glDepthFunc(1);
         }

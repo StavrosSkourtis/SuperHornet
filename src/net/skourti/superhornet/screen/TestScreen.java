@@ -21,7 +21,7 @@ import net.skourti.superhornet.graphics.Mesh;
 import net.skourti.superhornet.graphics.Model;
 import net.skourti.superhornet.graphics.Screen;
 import net.skourti.superhornet.graphics.ShaderProgram;
-import net.skourti.superhornet.models.Jet;
+import net.skourti.superhornet.models.SuperHornet;
 import net.skourti.superhornet.utils.MatrixConverter;
 
 /**

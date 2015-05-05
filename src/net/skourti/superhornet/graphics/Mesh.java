@@ -18,34 +18,39 @@ import static org.lwjgl.opengl.GL30.*;
  * @author Stavros
  */
 public class Mesh implements Disposable {
-    float [] vertices,color,normals,uv;
-    int [] indices;
-    
+
+    float[] vertices, color, normals, uv;
+    int[] indices;
+
     private Texture texture;
     private int vao, vbo, ibo, tbo, cbo, nbo;
     private int count;
-    
+
+    private boolean reSendToVBO = false;
+
     /*
-        for lighting and stuff like that
-    */
+     for lighting and stuff like that
+     */
     public Vec3 ka;
     public Vec3 kd;
     public Vec3 ks;
     public float illum;
     public float ns;
+    private ShaderProgram shader;
 
     public Mesh() {
         vao = vbo = ibo = tbo = cbo = nbo = -1;
     }
-    
+
     /**
-     * Creates a mesh with the given parameters
-     * vertices array cannot be null , the others can
+     * Creates a mesh with the given parameters vertices array cannot be null ,
+     * the others can
+     *
      * @param vertices
      * @param color
      * @param normals
      * @param uv
-     * @param indices 
+     * @param indices
      */
     public void create(float[] vertices, float[] color, float[] normals, float[] uv, int[] indices) {
         this.vertices = vertices;
@@ -53,7 +58,7 @@ public class Mesh implements Disposable {
         this.normals = normals;
         this.uv = uv;
         this.indices = indices;
-        
+
         if (indices != null) {
             count = indices.length;
         } else {
@@ -66,6 +71,13 @@ public class Mesh implements Disposable {
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
 
+        loadToVBO();
+
+        glBindVertexArray(0);
+    }
+
+    private void loadToVBO() {
+        bind();
         /*
          Bind the vertices to the vertex vbo
          */
@@ -115,15 +127,15 @@ public class Mesh implements Disposable {
             ibo = glGenBuffers();
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, BufferUtils.createIntBuffer(indices), GL_STATIC_DRAW);
-            
+
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         }
-         
+
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
+        unbind();
     }
-    
-    public void setTexture(Texture texture){
+
+    public void setTexture(Texture texture) {
         this.texture = texture;
     }
 
@@ -136,7 +148,7 @@ public class Mesh implements Disposable {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         }
     }
-    
+
     /**
      * Unbinds vertex array buffer
      */
@@ -147,25 +159,41 @@ public class Mesh implements Disposable {
 
         glBindVertexArray(0);
     }
-    
+
     /**
      * Draws the mesh
      */
     public void draw() {
-        
+
         if (ibo > 0) {
             glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
         } else {
             glDrawArrays(GL_TRIANGLES, 0, count);
         }
     }
-    
+
+    public void recalculateData() {
+        reSendToVBO = true;
+    }
+
     /**
      * renders the mesh
      */
-    public void render(ShaderProgram shader,Camera camera,Mat4 model) {
-        if(nbo>=0){
-            
+    public void render(ShaderProgram shader, Camera camera, Mat4 model) {
+        if (reSendToVBO) {
+            loadToVBO();
+
+            reSendToVBO = false;
+        }
+
+        if (this.shader != null) {
+            shader.unbind();
+            this.shader.bind();
+            this.shader.setUniformMat4f("pr_matrix", camera.combinedMatrix.multiply(model));
+
+        }
+
+        if (nbo >= 0) {
             shader.setUniformMat4f("V", camera.viewMatrix);
             shader.setUniformMat4f("M", model);
             shader.setUniform3f("LightPosition_worldspace", new Vec3(165000, 165000, 165000));
@@ -173,11 +201,20 @@ public class Mesh implements Disposable {
         if (texture != null) {
             texture.bind(shader);
         }
+
         bind();
         draw();
+
+        if (this.shader != null) {
+            this.shader.unbind();
+            shader.bind();
+        }
     }
-    
-    
+
+    public void useShader(ShaderProgram shader) {
+        this.shader = shader;
+    }
+
     /**
      * Disposes the mesh
      */
@@ -196,9 +233,49 @@ public class Mesh implements Disposable {
         if (cbo > 0) {
             glDeleteBuffers(cbo);
         }
-        if (nbo > 0 ){
+        if (nbo > 0) {
             glDeleteBuffers(nbo);
-        }  
+        }
+    }
+
+    public float[] getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(float[] vertices) {
+        this.vertices = vertices;
+    }
+
+    public float[] getColor() {
+        return color;
+    }
+
+    public void setColor(float[] color) {
+        this.color = color;
+    }
+
+    public float[] getNormals() {
+        return normals;
+    }
+
+    public void setNormals(float[] normals) {
+        this.normals = normals;
+    }
+
+    public float[] getUv() {
+        return uv;
+    }
+
+    public void setUv(float[] uv) {
+        this.uv = uv;
+    }
+
+    public int[] getIndices() {
+        return indices;
+    }
+
+    public void setIndices(int[] indices) {
+        this.indices = indices;
     }
 
 }

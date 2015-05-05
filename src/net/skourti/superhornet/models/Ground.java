@@ -21,6 +21,7 @@ import net.skourti.superhornet.graphics.ShaderProgram;
 import net.skourti.superhornet.graphics.Texture;
 import net.skourti.superhornet.utils.MatrixConverter;
 import net.skourti.superhornet.utils.TextureLoader;
+import net.skourti.superhornet.utils.objparser.ObjLoader;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -30,11 +31,13 @@ import org.lwjgl.opengl.GL11;
 public class Ground {
 
     public Ground(Screen screen) {
-        float size = 10000;
+        float size = 100000;
+        ObjLoader loader = new ObjLoader();
+        //loader.load("res/snow/snow_terrain.obj");
         Model groundModel = new Model();
         groundModel.useShader(ShaderProgram.textureShader);
         Mesh groundMesh = new Mesh();
-        groundMesh.setTexture(new Texture("res/grass.png",GL11.GL_REPEAT));
+        groundMesh.setTexture(new Texture("res/snow/CanadianArctic.jpg",GL11.GL_REPEAT));
         groundMesh.create(
                 new float[]{
                     -size, 0, -size, // down left

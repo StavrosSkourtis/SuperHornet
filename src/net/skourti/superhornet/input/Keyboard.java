@@ -15,8 +15,8 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 public class Keyboard extends GLFWKeyCallback {
 
     private static long window;
-    private static boolean[] repeat = new boolean[65536];
     private static boolean[] down = new boolean[65536];
+    private static boolean[] up = new boolean[65536];
     
     public Keyboard(long wind) {
         window = wind;
@@ -30,9 +30,6 @@ public class Keyboard extends GLFWKeyCallback {
     public static boolean isKeyDown(int key) {
         return down[key];
     }
-    public static boolean isKeyDownRepeat(int key){
-        return down[key];
-    }
-
+    
 
 }

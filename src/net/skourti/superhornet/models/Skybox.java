@@ -131,7 +131,7 @@ public class Skybox {
             }
         };
 
-  
+        skybox.translate(new Vec3(0, 50, 0));
         screen.addEntity(skybox);
     }
 

@@ -14,7 +14,10 @@ import net.skourti.superhornet.graphics.Texture;
 import net.skourti.superhornet.input.Keyboard;
 import net.skourti.superhornet.models.Ground;
 import net.skourti.superhornet.models.Jet;
+import net.skourti.superhornet.models.Raptor;
+import net.skourti.superhornet.models.SuperHornet;
 import net.skourti.superhornet.models.Skybox;
+import net.skourti.superhornet.models.SpaceShip;
 import net.skourti.superhornet.models.Terrain;
 import net.skourti.superhornet.utils.FpsCounter;
 import net.skourti.superhornet.utils.objparser.ObjLoader;
@@ -36,7 +39,7 @@ public class StartScreen extends Screen {
 
 //        camera.lookAt(new Vec3(0, 100, 15), new Vec3(0, 100, -20), new Vec3(0, 1, 0));
 //        camera.mouseControl = true;
-        jet = new Jet(this);
+        jet = new SuperHornet(this);
         
         
     }
@@ -62,7 +65,7 @@ public class StartScreen extends Screen {
     public void positionCameraBehindJet() {
         Vec3 pos = jet.getModelMatrix().multiply(camPo);
         Vec3 look = jet.getModelMatrix().multiply(jet.frontLookPoint);
-
+        
 //        System.out.println("Pos x:"+pos.x+" y:"+pos.y+" z:"+pos.z+" Target x:"+look.x+" y:"+look.y+" z:"+look.z);
 //        System.out.println(jet.getModelMatrix());
         camera.lookAt(pos, look, new Vec3(0, 1, 0));
@@ -70,9 +73,12 @@ public class StartScreen extends Screen {
     }
 
     public void jetControl() {
-
+        System.out.println("Height : "+Math.round(jet.getHeight())+" Speed : "+Math.round(jet.getSpeed()));
         if (Keyboard.isKeyDown(GLFW.GLFW_KEY_W)) {
             jet.engineThrotle(500000);
+        }
+        if (Keyboard.isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT)){
+            jet.engineThrotle(1200000);
         }
         if (Keyboard.isKeyDown(GLFW.GLFW_KEY_A)) {
             jet.forceFront(-30000, 0, 0);

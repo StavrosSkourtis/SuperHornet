@@ -9,7 +9,7 @@ Ks 0.752941 0.752941 0.752941
 Ni 1.000000
 d 1.000000
 illum 2
-Glass_Cockpit.png
+map_Kd Glass_Cockpit.png
 
 newmtl pilot
 Ns 5.882353
@@ -19,8 +19,7 @@ Ks 0.752941 0.752941 0.752941
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd FA-18E_SuperHornet_P01.png
-map_Bump FA-18E_SuperHornet_N.png
+map_Kd Pilot_usa.png
 
 newmtl plane
 Ns 5.882353
@@ -30,7 +29,8 @@ Ks 0.752941 0.752941 0.752941
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Pilot_usa.png
+map_Kd FA-18E_SuperHornet_P01.png
+map_Bump FA-18E_SuperHornet_N.png
 
 
 newmtl seat
