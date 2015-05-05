@@ -1,13 +1,13 @@
-#version 330 core
+#version 130
 
-in DATA{
-    vec2 tc;
-} vs_out;
+
+in vec2 tc;
+
 
 out vec4 color;
 
 uniform sampler2D tex;
 
 void main() {
-    color = texture( tex, vs_out.tc );
+    color = texture( tex, tc );
 }

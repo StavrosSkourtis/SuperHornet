@@ -1,11 +1,11 @@
-#version 330 core
+#version 130
 
 // Input vertex data, different for all executions of this shader.
-layout( location = 0 ) in vec3 position;
-
+in vec3 position;
+in vec2 textureUv;
 // Input vertex color 
-
-layout( location = 2 ) in vec4 color;
+in vec4 color;
+in vec3 normal;
 
 out vec4 fragmentColor;
 

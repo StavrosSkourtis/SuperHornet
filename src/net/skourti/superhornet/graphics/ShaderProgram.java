@@ -59,6 +59,12 @@ public final class ShaderProgram implements Disposable {
         attachVertexShader(vertexShader);
         attachFragmentShader(fragmentShader);
         
+        glBindAttribLocation(ID, VERTEX_ATTRIB, "position");
+        glBindAttribLocation(ID, TCOORD_ATTRIB, "textureUv");
+        glBindAttribLocation(ID, COLOR_ATTRIB, "color");
+        glBindAttribLocation(ID, NORMAL_ATTRIB, "normal");
+        
+        
         link();
     }
 

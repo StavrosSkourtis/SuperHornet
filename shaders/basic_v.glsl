@@ -1,16 +1,17 @@
-#version 330 core
+#version 130
 
-layout(location = 0 ) in vec3 position;
-layout(location = 1 ) in vec2 tc;
+in vec3 position;
+in vec2 textureUv;
+in vec4 color;
+in vec3 normal;
 
 uniform  mat4 pr_matrix;
 
-out DATA{
-    vec2 tc;
-} vs_out;
+
+out vec2 tc;
 
 void main() {
     gl_Position = pr_matrix* vec4(position,1);
     
-    vs_out.tc = tc;
+    tc = textureUv;
 }
