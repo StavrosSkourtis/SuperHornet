@@ -12,8 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sskourtis/Data/Copy/Code/Personal/SuperHornet/shaders/basic_v.glsl</file>
-            <file>file:/home/sskourtis/Data/Copy/Code/Personal/SuperHornet/shaders/basic_f.glsl</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Window.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Camera.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/Launcher.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Model.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Mesh.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Screen.java</file>
+            <file>file:/E:/Copy/Code/Personal/SuperHornet/src/net/skourti/superhornet/graphics/Texture.java</file>
         </group>
     </open-files>
 </project-private>
